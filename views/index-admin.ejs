@@ -11,55 +11,128 @@
   </form>
 </div> -->
 
+<div class="d-flex container px-4 justify-content-center" id="custom-cards">
+  <h6 class="fw-bold">(Όψη Διαχειριστή)</h6>
+</div>
+
 <div class="container px-4 py-5" id="custom-cards">
+
   <div class="d-flex justify-content-between border-bottom">
     
-    <h2 ><strong>Books that i have read</strong></h2>
+    <h2><strong>Βιβλία που διάβασα</strong></h2>
     <div class="d-flex align-items-center">
-      <span >Click on any of them to read my thoughts and notes.</span>
+      <span>Επιλέξτε κάποιο ώστε να διαβάσετε τις σκέψεις και τις σημειώσεις μου</span>
     </div>
 
   </div>
-    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-      <% booksRead.forEach(book => { %>
-       
-        <form type='image' method="post" action="/admin/book" class="col submit">
-          <!-- Εδώ να αλλαχτεί το υπόβαθρο -->
-          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');" name='book' value="<%= book %>"> 
-            <div class="d-flex flex-column h-100 p-4 pb-3 text-white text-shadow-1">
-              <div class="d-flex justify-content-center ">
-                <medium id="author<% book.id %>" class="author"><%= book.author %></medium>
-              </div>
-              <input type="hidden" id="bookID" name="bookID" value="<%= book.id %>">
-              <button type="submit" class="btn btn-link link-light link-underline-opacity-0 stretched-link">
-                <h3 class="title pt-4 mt-5 mb-4 display-6 lh-1 fw-bold text-center"><%= book.title %></h3>
-              </button>
-              <ul class="d-flex list-unstyled mt-auto">
-                <li class="me-auto">
-                  <medium class="rating"><%= book.rating %> / 10</medium>
-                </li>
-                <li class="d-flex align-items-center me-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo me-2" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
-                  </svg>
-                  <small class="place"><%= book.place %></small>
-                </li>
-                <li class="d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3 me-2" viewBox="0 0 16 16">
-                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                  </svg>
-                  <small class="date"><%= book.date ? book.date : '----' %></small>
-                </li>
-              </ul>
+
+    <div class="d-grid col-6 mx-auto mt-4">
+    <button id="add" type="button" class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold" data-bs-toggle="modal" data-bs-target="#additionModal">Προσθήκη Βιβλίου</button>
+  </div>
+
+  <div class="modal fade" id="additionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="additionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-add fs-5" id="additionModalLabel">Πληροφορίες Βιβλίου</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/add">
+            <div class="mb-3">
+              <label for="title" class="col-form-label">Τίτλος:</label>
+              <input id="title" type="text" name="title" class="form-control" value="">
             </div>
-          </div>
-        </form>
-
-      <% }) %>
-      
+            <div class="mb-3">
+              <label for="author" class="col-form-label">Συγγραφέας:</label>
+              <input id="author" type="text" name="author" class="form-control" value="">
+            </div>
+            <div class="row mb-3">
+              <div class="col-12">
+                <label id="writing-year12-label" for="writing-year12" class="col-form-label">Έτος Συγγραφής:</label>
+                <input id="writing-year12" type="text" name="writtenYear1" class="form-control"  value="">
+              </div>
+              <div class="col-6">
+                <label id="writing-year6-label" for="writing-year6" class="col-form-label" hidden>Έτος Συγγραφής:</label>
+                <input id="writing-year6" type="text" name="writtenYear2" class="form-control" value="" required hidden>
+              </div>
+              <div class="col-6">
+                <label id="reading-year-label" for="reading-year" class="col-form-label" hidden>Έτος Ανάγνωσης:</label>
+                <input id="reading-year" type="text" name="readYear" class="form-control" value="" required hidden>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6">
+                <label id="place-label" for="place" class="col-form-label" hidden>Τοποθεσία που διαβάστηκε:</label>
+                <input id="place" type="text" name="place" class="form-control" value="Θεσσαλονίκη" required hidden>
+              </div>
+              <div class="col-6">
+                <label id="rating-label" for="rating" class="col-form-label" hidden>Βαθμολογία:</label>
+                <input id="rating" type="number" name="rating" class="form-control" min="0" max="10" value="10" required hidden>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label id="notes-label" for="notes" class="col-form-label" hidden>Σημειώσεις:</label>
+              <textarea id="notes" name="notes" class="form-control" hidden></textarea>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <div class="form-check">
+                <input id="flexCheckChecked" name="read" class="form-check-input" type="checkbox" value="checked">
+                <label for="flexCheckChecked" class="form-check-label" >
+                  Το έχω διαβάσει
+                </label>
+              </div>
+              <div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Κλείσιμο</button>
+                <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    <% booksRead.forEach(book => { %>
+      
+      <form type='image' method="post" action="/admin/book" class="col submit">
+        <!-- Εδώ να αλλαχτεί το υπόβαθρο -->
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');" name='book' value="<%= book %>"> 
+          <div class="d-flex flex-column h-100 p-4 pb-3 text-white text-shadow-1">
+            <div class="d-flex justify-content-center ">
+              <medium id="author<% book.id %>" class="author"><%= book.author %></medium>
+            </div>
+            <input type="hidden" id="bookID" name="bookID" value="<%= book.id %>">
+            <button type="submit" class="btn btn-link link-light link-underline-opacity-0 stretched-link">
+              <h3 class=" pt-4 mt-5 mb-4 display-6 lh-1 fw-bold text-center"><%= book.title %></h3>
+            </button>
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <medium><%= book.rating %> / 10</medium>
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo me-2" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                </svg>
+                <small><%= book.place %></small>
+              </li>
+              <li class="d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3 me-2" viewBox="0 0 16 16">
+                  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg>
+                <small><%= book.date ? book.date : '----' %></small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+
+    <% }) %>
+    
+  </div>
+
 </div>
 
 <script
@@ -67,7 +140,37 @@
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
   crossorigin="anonymous"
 ></script>
+
 <script>
-  getTimeDifference
+flexCheckChecked.addEventListener("change", () => {
+  if (flexCheckChecked.checked) {
+    document.getElementById('writing-year12').setAttribute("hidden", true)
+    document.getElementById('writing-year6').removeAttribute('hidden')
+    document.getElementById('reading-year').removeAttribute('hidden')
+    document.getElementById('rating').removeAttribute('hidden')
+    document.getElementById('place').removeAttribute('hidden')
+    document.getElementById('notes').removeAttribute('hidden')
+    document.getElementById('writing-year12-label').setAttribute("hidden", true)
+    document.getElementById('writing-year6-label').removeAttribute('hidden')
+    document.getElementById('reading-year-label').removeAttribute('hidden')
+    document.getElementById('rating-label').removeAttribute('hidden')
+    document.getElementById('place-label').removeAttribute('hidden')
+    document.getElementById('notes-label').removeAttribute('hidden')
+  } else {
+    document.getElementById('writing-year6').setAttribute("hidden", true)
+    document.getElementById('writing-year12').removeAttribute('hidden')
+    document.getElementById('reading-year').setAttribute("hidden", true)
+    document.getElementById('rating').setAttribute("hidden", true)
+    document.getElementById('place').setAttribute("hidden", true)
+    document.getElementById('notes').setAttribute("hidden", true)
+    document.getElementById('writing-year6-label').setAttribute("hidden", true)
+    document.getElementById('writing-year12-label').removeAttribute('hidden')
+    document.getElementById('reading-year-label').setAttribute("hidden", true)
+    document.getElementById('rating-label').setAttribute("hidden", true)
+    document.getElementById('place-label').setAttribute("hidden", true)
+    document.getElementById('notes-label').setAttribute("hidden", true)
+  }
+});
 </script>
+
 <%- include('partials/footer.ejs'); -%>
