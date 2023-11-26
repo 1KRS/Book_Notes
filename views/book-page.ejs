@@ -1,0 +1,82 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="container">
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search..."
+      aria-label="Search"
+    />
+  </form>
+</div>
+
+<div class="container px-4 py-5" id="custom-cards">
+  <div class="d-flex justify-content-between border-bottom">
+    
+    <% if (locals.book) { %>
+      <h2 ><strong><%= book.title %></strong></h2>
+      <div class="d-flex align-items-center">
+        <h3 ><strong><%= book.author %></strong></h3>
+      </div>
+    <% } else { %>   
+      <h2 ><strong>Δεν βρέθηκαν οι πληροφορίες του βιβλίου</strong></h2>
+    <% } %>
+          
+  </div>
+    <div class="row row-cols-1 align-items-stretch g-4 py-5">
+      <% if (locals.book) { %>
+
+        <div class="col">
+          <!-- Εδώ να αλλαχτεί το υπόβαθρο -->
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');" > 
+            <div class="d-flex flex-column h-100 p-3 ps-5 pe-5 text-white text-shadow-1">
+              <ul class="d-flex list-unstyled mt-auto">
+                <li class="me-auto">
+                  <medium class="rating"><%= book.rating %> / 10</medium>
+                </li>
+                <li class="d-flex align-items-center me-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                  </svg>
+                  <small class="place"><%= book.place %></small>
+                </li>
+                <li class="d-flex align-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3 me-2" viewBox="0 0 16 16">
+                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                  </svg>
+                  <small class="date"><%= book.date ? book.date : '----' %></small>
+                </li>
+              </ul>
+            </div>
+            
+
+              <div class="bg-dark text-secondary px-4 py-2 text-center">
+
+                <div class="col-lg-10 mx-auto">
+                  <p class="fs-5 mb-4"><%= book.notes %></p>
+                </div>
+              </div>
+
+            
+          </div>
+          </div>
+          
+      <% } else { %>
+
+        <h3 class="title pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-center">Δεν υπάρχουν στοιχεία γι' αυτό το βιβλίο</h3>
+
+      <% } %>
+      
+    </div>
+  </div>
+</div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+  crossorigin="anonymous"
+></script>
+
+<%- include('partials/footer.ejs'); -%>
