@@ -1,0 +1,189 @@
+<%- include('partials/header.ejs'); -%>
+
+<!-- <div class="container">
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search..."
+      aria-label="Search"
+    />
+  </form>
+</div> -->
+
+<div class="d-flex container px-4 justify-content-center" id="custom-cards">
+  <h6 class="fw-bold">(Όψη Διαχειριστή)</h6>
+</div>
+
+<div class="container px-4 py-5" id="custom-cards">
+  <div class="d-flex justify-content-between border-bottom">
+    
+    <% if (locals.book) { %>
+      <h2 ><strong><%= book.title %></strong></h2>
+      <div class="d-flex align-items-center">
+        <h3 ><strong><%= book.author %></strong></h3>
+      </div>
+    <% } else { %>   
+      <h2 ><strong>Δεν βρέθηκαν οι πληροφορίες του βιβλίου</strong></h2>
+    <% } %>
+          
+  </div>
+  <div class="row row-cols-1 align-items-stretch g-4 py-5">
+    
+    <% if (locals.book) { %>
+
+      <div class="col">
+        <!-- Εδώ να αλλαχτεί το υπόβαθρο -->
+        <div class="card card-cover h-100 p-3 ps-5 pe-5 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');" > 
+          <div class="d-flex flex-column h-100 text-white text-shadow-1">
+            <div id="info">
+              <ul class="d-flex list-unstyled mt-auto">
+                <li class="me-auto">
+                  <medium ><%= book.rating %> / 10</medium>
+                </li>
+                <li class="d-flex align-items-center me-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                  </svg>
+                  <small ><%= book.place %></small>
+                </li>
+                <li class="d-flex align-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3 me-2" viewBox="0 0 16 16">
+                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                  </svg>
+                  <small ><%= book.date ? book.date : '----' %></small>
+                </li>
+              </ul>
+              <div class="bg-dark text-secondary px-4 py-1 text-center">
+                <div class="col mx-auto">
+                  <p class="fs-5 my-2"><%= book.notes %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Κρυμμένο. Ενεργοποιείται μόνο όταν πατηθεί το πλήκτρο αλλαγής -->
+          <div id="edit-info" hidden="true">
+            <form  class="d-flex flex-column h-100 text-white text-shadow-1" method="post" action="<%= `/admin/edit/${book.id}` %>">
+              <input type="hidden" id="userID" name="userID" value="<%= book.user_id %>">
+              <input type="hidden" id="bookID" name="bookID" value="<%= book.book_id %>">
+
+                <ul class="d-flex list-unstyled mt-auto">
+                  <li class="me-auto">
+                    <input id="edit-rating" type="number" name="rating" value="<%= book.rating %>" class="edit-rating">
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo me-2" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                    </svg>
+                    <input id="edit-place" type="text" name="place" value="<%= book.place %>">
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3 me-2" viewBox="0 0 16 16">
+                      <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                      <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    <input id="edit-date" type="number" name="date" value="<%= book.date %>">
+                  </li>
+                </ul>
+
+                <div class=" bg-dark px-4 py-1 text-center">
+                    <textarea id="edit-notes" name="notes" cols="100" rows="10"><%= book.notes %></textarea>
+                </div>
+              
+              <div id="save-and-return-buttons-container" class="d-flex justify-content-sm-center">
+                <button id="return-back-from-edit" type="button" onclick="cancelEditAndDelete()" class="btn btn-outline-warning btn-lg px-4 me-sm-3 fw-bold" hidden>Επιστροφή</button>
+                <button id="done-edit" type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" hidden>Αποθήκευση</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Κρυμμένο. Ενεργοποιείται μόνο όταν πατηθεί το πλήκτρο διαγραφής -->
+          <div id="delete-info" hidden="true">
+            <form class="d-flex flex-column h-100 text-white text-shadow-1" method="post" action="<%= `/admin/delete/${book.id}` %>">
+              <input type="hidden" id="userID" name="userID" value="<%= book.user_id %>">
+              <input type="hidden" id="bookID" name="bookID" value="<%= book.book_id %>">
+
+              <div class="bg-dark text-danger px-4 py-1 text-center" >
+                <div class="col mt-2 mb-2 mx-auto">
+                  <h2><strong>Είσαι σίγουρος ότι θέλεις να διαγράψεις αυτό το βιβλίο από τον κατάλογο με τα διαβασμένα σου;</strong></h2>
+                </div>
+              </div>
+              
+              <div id="delete-and-return-buttons-container" class="d-flex justify-content-sm-center">
+                <button id="return-back-from-delete" type="button" onclick="cancelEditAndDelete()" class="btn btn-outline-warning btn-lg px-4 me-sm-3 fw-bold" hidden>Επιστροφή</button>
+                <button id="done-delete" type="submit" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold" hidden>Διαγραφή</button>
+              </div>
+            </form>
+          </div>
+
+          
+          <div id="edit-buttons-container" class="d-grid gap-2 py-4 d-sm-flex justify-content-sm-center">
+            <a id="return-home" type="button" href="/admin" class="btn btn-outline-warning btn-lg px-4 me-sm-3 fw-bold" role="button">Επιστροφή</a>
+            <button id="edit" type="button" onclick="handleEdit()" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Αλλαγή</button>
+            <button id="delete" type="button" onclick="handleDelete()" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold">Διαγραφή</button>
+          </div>
+
+        </div>
+      </div>
+
+    <% } else { %>
+
+      <h3 class="title pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-center">Δεν υπάρχουν στοιχεία γι' αυτό το βιβλίο</h3>
+
+    <% } %>
+    
+  </div>
+</div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+  crossorigin="anonymous"
+></script>
+<script>
+  function handleEdit() {
+    document.getElementById("edit-info").removeAttribute("hidden")
+    document.getElementById("edit-buttons-container").classList.remove('py-4');
+    document.getElementById("edit").setAttribute("hidden", true)
+    document.getElementById("delete").setAttribute("hidden", true)
+    document.getElementById("save-and-return-buttons-container").classList.add('py-4');
+    document.getElementById("return-back-from-edit").removeAttribute("hidden")
+    document.getElementById("done-edit").removeAttribute("hidden")
+    document.getElementById("return-home").setAttribute("hidden", true)
+    document.getElementById("info").setAttribute("hidden", true)
+  }
+
+  function cancelEditAndDelete() {
+    document.getElementById("edit-info").setAttribute("hidden", true)
+    document.getElementById("delete-info").setAttribute("hidden", true)
+    document.getElementById("edit-buttons-container").classList.add('py-4');
+    document.getElementById("edit").removeAttribute("hidden")
+    document.getElementById("delete").removeAttribute("hidden")
+    document.getElementById("save-and-return-buttons-container").classList.remove('py-4');
+    document.getElementById("delete-and-return-buttons-container").classList.remove('py-4');
+    document.getElementById("return-back-from-edit").setAttribute("hidden", true)
+    document.getElementById("return-back-from-delete").setAttribute("hidden", true)
+    document.getElementById("done-delete").setAttribute("hidden", true)
+    document.getElementById("done-edit").setAttribute("hidden", true)
+    document.getElementById("return-home").removeAttribute("hidden")
+    document.getElementById("info").removeAttribute("hidden")
+  }
+</script>
+<script>
+  function handleDelete() {
+    document.getElementById("delete-info").removeAttribute("hidden")
+    document.getElementById("edit-buttons-container").classList.remove('py-4');
+    document.getElementById("edit").setAttribute("hidden", true)
+    document.getElementById("delete").setAttribute("hidden", true)
+    document.getElementById("delete-and-return-buttons-container").classList.add('py-4');
+    document.getElementById("return-back-from-delete").removeAttribute("hidden")
+    document.getElementById("done-delete").removeAttribute("hidden")
+    document.getElementById("return-home").setAttribute("hidden", true)
+    document.getElementById("info").setAttribute("hidden", true)
+  }
+</script>
+
+
+<%- include('partials/footer.ejs'); -%>
