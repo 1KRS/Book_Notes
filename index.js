@@ -44,23 +44,33 @@ app.use(getReadBooks);
 
 // GET
 app.get('/', (req, res) => {
-  // console.log('Διαβασμένα', booksRead)
   res.render('index.ejs', { booksRead });
 });
 
 app.get('/admin', (req, res) => {
-  // console.log('Διαβασμένα', booksRead)
   res.render('index-admin.ejs', { booksRead });
 });
 
+app.get('/register', (req, res) => {
+  res.render('index.ejs');
+});
+
+app.get('/login', (req, res) => {
+  res.render('index.ejs');
+});
+
 // POST
+app.post('/login', (req, res) => {
+  res.render('index.ejs');
+});
+
 app.post('/book', async (req, res) => {
   const τΒιβλίου = req.body.bookID;
   const δεδομένα = await db.query(
     `SELECT id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
   );
   const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
-  // console.log(`Δεδομένα βιβλίου ${τΒιβλίου}`, book);
+  
   res.render('book-page.ejs', { book });
 });
 
@@ -70,7 +80,7 @@ app.post('/admin/book', async (req, res) => {
     `SELECT id, user_id, book_id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
   );
   const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
-  // console.log(`Δεδομένα βιβλίου ${τΒιβλίου}`, book);
+  
   res.render('book-page-admin.ejs', { book });
 });
 
@@ -84,22 +94,13 @@ app.post('/add', async (req, res) => {
   const βαθμολογία = parseInt(req.body.rating);
   const σημειώσεις = req.body.notes;
   const αναγνωσμένο = req.body.read;
-  // console.log(`Δεδομένα`, req.body);
+  
   
   const id = await db.query(
     `INSERT INTO books (title, author, age) VALUES ('${τίτλος}', '${συγγραφέας}', ${έτοςΣυγγραφής}) RETURNING id`
     );
   const τΒιβλίου = id.rows[0].id
-
-  // console.log(`Δεδομένα νέου διαβασμένου βιβλίου
-  // // Τ.Χρήστη: ${τΧρήστη}
-  // // Τ.Βιβλίου: ${τΒιβλίου}
-  // // Τοποθεσία: ${τοποθεσία}
-  // // Βαθμολογία: ${βαθμολογία}
-  // // Έτος Ανάγνωσης: ${έτοςΑνάγνωσης}
-  // // Σημειώσεις: ${σημειώσεις} 
-  // `);
-  // console.log(`Ταυτότητα βιβλίου`, τΒιβλίου);
+  
 
   if (αναγνωσμένο === 'checked') {
     await db.query(
@@ -113,22 +114,13 @@ app.post('/add', async (req, res) => {
 
 // PATCH
 app.post('/admin/edit/:id', async (req, res) => {
-  const δΒιβλίου = parseInt(req.params.id);
+  // const δΒιβλίου = parseInt(req.params.id);
   const τΧρήστη = parseInt(req.body.userID);
   const τΒιβλίου = parseInt(req.body.bookID);
   const βαθμολογία = parseInt(req.body.rating);
   const τοποθεσία = req.body.place;
   const ημερομηνία = parseInt(req.body.date);
   const σημειώσεις = req.body.notes;
-
-  // console.log(`Διορθωμένα δεδομένα βιβλίου στον δείκτη ${δΒιβλίου}
-  // // Τ.Χρήστη: ${τΧρήστη}
-  // // Τ.Βιβλίου: ${τΒιβλίου}
-  // // Τοποθεσία: ${τοποθεσία}
-  // // Βαθμολογία: ${βαθμολογία}
-  // // Ημερομηνία: ${ημερομηνία}
-  // // Σημειώσεις: ${σημειώσεις}
-  // `);
 
   if (ημερομηνία) {
     await db.query(
@@ -144,7 +136,6 @@ app.post('/admin/edit/:id', async (req, res) => {
     `SELECT id, user_id, book_id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
   );
   const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
-  // console.log(`Διορθωμένα δεδομένα βιβλίου ${τΒιβλίου}`, book);
   res.render('book-page-admin.ejs', { book });
 });
 
@@ -154,10 +145,6 @@ app.post('/admin/delete/:id', async (req, res) => {
   const τΧρήστη = parseInt(req.body.userID);
   const τΒιβλίου = parseInt(req.body.bookID);
 
-  console.log(`Διαγραφή βιβλίου στον δείκτη ${δΒιβλίου}
-  // Τ.Χρήστη: ${τΧρήστη}
-  // Τ.Βιβλίου: ${τΒιβλίου}
-  `);
 
   await db.query(
     `DELETE FROM books_read WHERE user_id = ${τΧρήστη} AND book_id = ${τΒιβλίου}`
@@ -165,6 +152,7 @@ app.post('/admin/delete/:id', async (req, res) => {
   res.redirect('/admin');
 });
 
+// Πύλη Διακομιστή (Server Port)
 app.listen(port, () => {
   console.log(
     `Διακομιστής: Ενεργός στην πύλη ${port} --> http://localhost:${port}`
