@@ -22,7 +22,6 @@ let booksRead = [];
 
 // Δεδομένα (Data)
 
-
 // Λειτουργίες (Functions)
 const getReadBooks = async (res, req, next) => {
   const δεδομένα = await db.query(
@@ -33,9 +32,15 @@ const getReadBooks = async (res, req, next) => {
 };
 
 const αντικατάστασηΦωνηέντων = (text) => {
-  return text.replace('Ά', 'Α').replace('Έ', 'Ε').replace('Ή', 'Η').replace('Ί', 'Ι').replace('Ό', 'Ο').replace('Ύ', 'Υ').replace('Ώ', 'Ω')
-}
-
+  return text
+    .replace('Ά', 'Α')
+    .replace('Έ', 'Ε')
+    .replace('Ή', 'Η')
+    .replace('Ί', 'Ι')
+    .replace('Ό', 'Ο')
+    .replace('Ύ', 'Υ')
+    .replace('Ώ', 'Ω');
+};
 
 // Ενδιάμεσες Λειτουργίες (Middleware)
 app.use(express.urlencoded({ extended: true }));
@@ -55,13 +60,26 @@ app.get('/register', (req, res) => {
   res.render('index.ejs');
 });
 
-app.get('/login', (req, res) => {
-  res.render('index.ejs');
-});
 
 // POST
-app.post('/login', (req, res) => {
-  res.render('index.ejs');
+app.post('/login', async (req, res) => {
+  const ηΤαχυδρομείο = req.body.email;
+  const κωδικός = req.body.password;
+
+  const δεδομένα = await db.query(
+    `SELECT * from users WHERE email = '${ηΤαχυδρομείο}'`
+  );
+  const χρήστης = δεδομένα.rows[0];
+
+  if (δεδομένα.rowCount !== 0) {
+    if ( χρήστης.password == κωδικός) {
+      χρήστης.admin == true ? res.render('index-admin.ejs', { booksRead }) : res.render('index.ejs', { booksRead })
+    } else {
+      console.error('Ο κωδικός που πληκτρολογήθηκε είναι λάθος');
+    }
+  } else {
+    console.error('Ο χρήστης με αυτήν την διεύθυνση δεν υπάρχει');
+  }
 });
 
 app.post('/book', async (req, res) => {
@@ -70,7 +88,7 @@ app.post('/book', async (req, res) => {
     `SELECT id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
   );
   const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
-  
+
   res.render('book-page.ejs', { book });
 });
 
@@ -80,27 +98,26 @@ app.post('/admin/book', async (req, res) => {
     `SELECT id, user_id, book_id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
   );
   const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
-  
+
   res.render('book-page-admin.ejs', { book });
 });
 
 app.post('/add', async (req, res) => {
-  const τΧρήστη = 1
+  const τΧρήστη = 1;
   const τίτλος = αντικατάστασηΦωνηέντων(req.body.title.toUpperCase());
   const συγγραφέας = req.body.author;
-  const έτοςΣυγγραφής = parseInt(req.body.writtenYear1) || parseInt(req.body.writtenYear2)
+  const έτοςΣυγγραφής =
+    parseInt(req.body.writtenYear1) || parseInt(req.body.writtenYear2);
   const έτοςΑνάγνωσης = parseInt(req.body.readYear);
   const τοποθεσία = req.body.place;
   const βαθμολογία = parseInt(req.body.rating);
   const σημειώσεις = req.body.notes;
   const αναγνωσμένο = req.body.read;
-  
-  
+
   const id = await db.query(
     `INSERT INTO books (title, author, age) VALUES ('${τίτλος}', '${συγγραφέας}', ${έτοςΣυγγραφής}) RETURNING id`
-    );
-  const τΒιβλίου = id.rows[0].id
-  
+  );
+  const τΒιβλίου = id.rows[0].id;
 
   if (αναγνωσμένο === 'checked') {
     await db.query(
@@ -109,7 +126,7 @@ app.post('/add', async (req, res) => {
   }
   res.redirect('/admin');
 });
- 
+
 // PUT
 
 // PATCH
@@ -144,7 +161,6 @@ app.post('/admin/delete/:id', async (req, res) => {
   const δΒιβλίου = parseInt(req.params.id);
   const τΧρήστη = parseInt(req.body.userID);
   const τΒιβλίου = parseInt(req.body.bookID);
-
 
   await db.query(
     `DELETE FROM books_read WHERE user_id = ${τΧρήστη} AND book_id = ${τΒιβλίου}`

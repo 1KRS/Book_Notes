@@ -83,11 +83,9 @@
             />
           </a>
           <ul class="dropdown-menu text-small disabled" >
-            <li><a class="dropdown-item" href="#">Νέο Εγχείρημα...</a></li>
-            <li><a class="dropdown-item" href="#">Ρυθμίσεις</a></li>
-            <li><a class="dropdown-item" href="#">Λογαριασμός</a></li>
+            <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#adminLoginModal">Όψη Διαχειριστή</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Έξοδος</a></li>
+            <li><a class="dropdown-item" href="/">Έξοδος</a></li>
           </ul>
         </div>
       </div>
@@ -96,3 +94,33 @@
   <body>
     <main>
 </html>
+
+
+
+<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">Συνδέσου</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    
+      <div class="modal-body p-5 pt-0">
+        <form class="" method="post" action="/login">
+          <div class="form-floating mb-3">
+            <input id="floatingEMail" type="email" class="form-control rounded-3" name='email' placeholder="παράδειγμα@παράδειγμα.gr">
+            <label for="floatingEMail">Ηλεκτρονικό Ταχυδρομείο</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingPassword" type="password" class="form-control rounded-3" name='password' placeholder="Κωδικός">
+            <label for="floatingPassword">Κωδικός</label>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Σύνδεση</button>
+          <small class="text-body-secondary text-center">Εάν δεν έχετε λογαριασμό πατήστε εδώ για εγγραφή.</small>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
