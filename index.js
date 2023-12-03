@@ -18,16 +18,16 @@ const db = new pg.Client({
 db.connect();
 
 // Αρχικές Τιμές (Initial Values)
-let booksRead = [];
+let data = [];
 
 // Δεδομένα (Data)
 
 // Λειτουργίες (Functions)
 const getReadBooks = async (res, req, next) => {
   const δεδομένα = await db.query(
-    'SELECT id, author, title, rating, place, date from books JOIN books_read ON books.id = book_id'
+    'SELECT first_name, book_id, author, title, rating, place, date from books_read JOIN books ON books.id = book_id JOIN users ON users.id = user_id'
   );
-  booksRead = δεδομένα.rows;
+  data = δεδομένα.rows;
   next();
 };
 
@@ -49,17 +49,16 @@ app.use(getReadBooks);
 
 // GET
 app.get('/', (req, res) => {
-  res.render('index.ejs', { booksRead });
+  res.render('index.ejs', { data });
 });
 
 app.get('/admin', (req, res) => {
-  res.render('index-admin.ejs', { booksRead });
+  res.render('index-admin.ejs', { data });
 });
 
 app.get('/register', (req, res) => {
   res.render('index.ejs');
 });
-
 
 // POST
 app.post('/login', async (req, res) => {
@@ -72,8 +71,10 @@ app.post('/login', async (req, res) => {
   const χρήστης = δεδομένα.rows[0];
 
   if (δεδομένα.rowCount !== 0) {
-    if ( χρήστης.password == κωδικός) {
-      χρήστης.admin == true ? res.render('index-admin.ejs', { booksRead }) : res.render('index.ejs', { booksRead })
+    if (χρήστης.password == κωδικός) {
+      χρήστης.admin == true
+        ? res.render('index-admin.ejs', { data })
+        : res.render('index.ejs', { data });
     } else {
       console.error('Ο κωδικός που πληκτρολογήθηκε είναι λάθος');
     }
@@ -85,21 +86,22 @@ app.post('/login', async (req, res) => {
 app.post('/book', async (req, res) => {
   const τΒιβλίου = req.body.bookID;
   const δεδομένα = await db.query(
-    `SELECT id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
+    'SELECT first_name, user_id, book_id, author, title, rating, place, date, notes from books_read JOIN books ON books.id = book_id JOIN users ON users.id = user_id'
   );
-  const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
+  const data = δεδομένα.rows.find((β) => β.book_id == τΒιβλίου);
 
-  res.render('book-page.ejs', { book });
+  res.render('book-page.ejs', { data });
 });
 
 app.post('/admin/book', async (req, res) => {
   const τΒιβλίου = req.body.bookID;
   const δεδομένα = await db.query(
-    `SELECT id, user_id, book_id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
+    'SELECT first_name, user_id, book_id, author, title, rating, place, date, notes from books_read JOIN books ON books.id = book_id JOIN users ON users.id = user_id'
   );
-  const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
 
-  res.render('book-page-admin.ejs', { book });
+  const data = δεδομένα.rows.find((β) => β.book_id == τΒιβλίου);
+ 
+  res.render('book-page-admin.ejs', { data });
 });
 
 app.post('/add', async (req, res) => {
@@ -136,8 +138,11 @@ app.post('/admin/edit/:id', async (req, res) => {
   const τΒιβλίου = parseInt(req.body.bookID);
   const βαθμολογία = parseInt(req.body.rating);
   const τοποθεσία = req.body.place;
-  const ημερομηνία = parseInt(req.body.date);
+  const ημερομηνία = req.body.date;
   const σημειώσεις = req.body.notes;
+
+    console.log('Αλλαγή', τΧρήστη, τΒιβλίου, βαθμολογία, τοποθεσία, ημερομηνία, σημειώσεις);
+
 
   if (ημερομηνία) {
     await db.query(
@@ -150,10 +155,12 @@ app.post('/admin/edit/:id', async (req, res) => {
   }
 
   const δεδομένα = await db.query(
-    `SELECT id, user_id, book_id, author, title, rating, place, date, notes from books JOIN books_read ON books.id = book_id`
+    'SELECT first_name, user_id, book_id, author, title, rating, place, date, notes from books_read JOIN books ON books.id = book_id JOIN users ON users.id = user_id'
   );
-  const book = δεδομένα.rows.find((β) => β.id == τΒιβλίου);
-  res.render('book-page-admin.ejs', { book });
+
+  const data = δεδομένα.rows.find((β) => β.book_id == τΒιβλίου);
+
+  res.render('book-page-admin.ejs', { data });
 });
 
 // DELETE
