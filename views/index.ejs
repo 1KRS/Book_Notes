@@ -1,6 +1,10 @@
-<%- include('partials/header.ejs'); -%>
+<% if (locals.data) { %>
+  <%- include('partials/header.ejs', {data}); -%>
+<% } else { %>   
+  <%- include('partials/header.ejs'); -%>
+<% } %>
 
-<div class="container">
+<!-- <div class="container">
   <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
     <input
       type="search"
@@ -9,20 +13,22 @@
       aria-label="Search"
     />
   </form>
-</div>
+</div> -->
+
+
 
 <div class="container px-4 py-5" id="custom-cards">
   <div class="d-flex justify-content-between border-bottom">
     
-    <h2 ><strong>Books that i have read</strong></h2>
+    <h2 ><strong>Βιβλία που διάβασα</strong></h2>
     <div class="d-flex align-items-center">
-      <span >Click on any of them to read my thoughts and notes.</span>
+      <span >Επιλέξτε κάποιο ώστε να διαβάσετε τις σκέψεις και τις σημειώσεις μου</span>
     </div>
 
   </div>
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-      <% booksRead.forEach(book => { %>
-       
+      <% data.forEach(book => { %>
+        <% console.log("BookG", book) %>
         <form type='image' method="post" action="/book" class="col submit">
           <!-- Εδώ να αλλαχτεί το υπόβαθρο -->
           <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');" name='book' value="<%= book %>"> 
@@ -30,7 +36,7 @@
               <div class="d-flex justify-content-center ">
                 <medium id="author<% book.id %>" class="author"><%= book.author %></medium>
               </div>
-              <input type="hidden" id="bookID" name="bookID" value="<%= book.id %>">
+              <input type="hidden" id="bookID" name="bookID" value="<%= book.book_id %>">  <!-- Επιστρέφει την ταυτότητα του βιβλίου -->
               <button type="submit" class="btn btn-link link-light link-underline-opacity-0 stretched-link">
                 <h3 class="title pt-4 mt-5 mb-4 display-6 lh-1 fw-bold text-center"><%= book.title %></h3>
               </button>
