@@ -79,6 +79,11 @@
               height="32"
               class="rounded-circle"
             />
+            <!-- <% console.log("Γαμώ", data) %> -->
+              <% if (data) { %>
+              <%= data.first_name %>
+            <% } %>
+            
           </a>
           <ul class="dropdown-menu text-small disabled" >
             <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#adminLoginModal">Όψη Διαχειριστή</a></li>
@@ -125,33 +130,49 @@
 <div class="modal fade" id="technologiesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="additionModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 shadow">
-      <div class="modal-body p-5">
-        <h2 class="fw-bold mb-0">Τεχνολογίες</h2>
+      <div class="modal-body px-5 py-4">
+        <h2 class="fw-bold mb-2 text-center">Τεχνολογίες</h2>
 
-        <ul class="d-grid gap-4 my-5 list-unstyled small">
-          <li class="d-flex gap-4">
-            <svg class="bi text-body-secondary flex-shrink-0" width="48" height="48"><use xlink:href="#grid-fill"></use></svg>
-            <div>
-              <h5 class="mb-0">Grid view</h5>
-              Not into lists? Try the new grid view.
-            </div>
-          </li>
-          <li class="d-flex gap-4">
-            <svg class="bi text-warning flex-shrink-0" width="48" height="48"><use xlink:href="#bookmark-star"></use></svg>
-            <div>
-              <h5 class="mb-0">Bookmarks</h5>
-              Save items you love for easy access later.
-            </div>
-          </li>
-          <li class="d-flex gap-4">
-            <svg class="bi text-primary flex-shrink-0" width="48" height="48"><use xlink:href="#film"></use></svg>
-            <div>
-              <h5 class="mb-0">Video embeds</h5>
-              Share videos wherever you go.
-            </div>
-          </li>
+        <ul class="d-grid gap-3 my-3 list-unstyled small">
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            <li class="d-flex gap-4 justify-content-center">
+                <h5 class="mb-0 text-center">Βασικές</h5>
+            </li>
+            <li class="d-flex gap-4 justify-content-around">
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/javascript.svg" alt="Javascript"/>
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/css.svg" alt="CSS"/>
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/html.svg" alt="HTML"/>
+            </li>
+          </ul>
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            <li class="d-flex gap-4 justify-content-center">
+              <h5 class="mb-0 text-center">Επιπλέον</h5>
+            </li>
+            <li class="d-flex gap-4 justify-content-around">
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/ejs.svg" alt="EJS"/>
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/express.svg" alt="CSS"/>
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/bootstrap.svg" alt="Bootstrap"/>
+            </li> 
+          </ul>
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            <li class="d-flex gap-4 justify-content-center">
+              <h5 class="mb-0 text-center">Βάση Δεδομένων</h5>
+            </li>
+            <li class="d-flex gap-4 justify-content-around">
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/postgresql.svg" alt="PostgreSQL"/>
+            </li> 
+          </ul>
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            <li class="d-flex gap-4 justify-content-center">
+              <h5 class="mb-0 text-center">Έλεγχος Εκδόσεων</h5>
+            </li>
+            <li class="d-flex gap-4 justify-content-around">
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/git.svg" alt="GIT"/>
+              <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/github.svg" alt="Github"/>
+            </li> 
+          </ul>
         </ul>
-        <button type="button" class="btn btn-lg btn-primary mt-5 w-100" data-bs-dismiss="modal">Great, thanks!</button>
+        <button type="button" class="btn btn-lg btn-primary mt-2 w-100" data-bs-dismiss="modal">Ωραίος</button>
       </div>
     </div>
   </div>
