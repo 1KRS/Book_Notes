@@ -1,0 +1,167 @@
+<% if (locals.data) { %> <%- include('partials/header.ejs', {data}); -%> <% }
+else { %> <%- include('partials/header.ejs'); -%> <% } %>
+
+<!-- <div class="container">
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search..."
+      aria-label="Search"
+    />
+  </form>
+</div> -->
+
+<div class="d-grid col-10 mx-auto">
+  <button
+    id="features"
+    type="button"
+    class="btn btn-outline-danger btn-lg p-1 me-sm-3"
+    data-bs-toggle="modal"
+    data-bs-target="#newFeaturesModal"
+  >
+    <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <img
+        class="bi bi-hand-index px-2"
+        height="18"
+        src="./images/δάχτυλο.svg"
+        alt="Javascript"
+      />
+
+      <h6 class="fw-bold mb-0">Υπό Κατασκευή</h6>
+
+      <img
+        class="bi bi-hand-index px-2"
+        height="18"
+        src="./images/δάχτυλο.svg"
+        alt="Javascript"
+      />
+    </div>
+  </button>
+</div>
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold text-body-emphasis">
+    Καλώς ήλθατε στην Βιβλιοθήκη
+  </h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Τον προσωπικό μου ιστότοπο όπου αποθηκεύω, σημειώνω και βαθμολογώ τα
+      βιβλία που έχω διαβάσει.
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+      <a class="btn btn-primary btn-lg px-4" type="button" href="/user">Δείτε τα βιβλία μου</a>
+      <a class="btn btn-outline-secondary btn-lg px-4" type="button" href="/user">Όψη Διαχειριστή</a>
+    </div>
+  </div>
+  <div class="overflow-hidden" style="max-height: 30vh">
+    <div class="container px-5">
+      <img
+        src="bootstrap-docs.png"
+        class="img-fluid border rounded-3 shadow-lg mb-4"
+        alt="Example image"
+        width="700"
+        height="500"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+
+<div
+  class="modal fade"
+  id="newFeaturesModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="additionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-body px-5 py-4">
+        <h2 class="fw-bold pb-1 mb-2 text-center">Προσθήκες</h2>
+        <hr class="divider" />
+        <ul class="d-grid gap-2 my-2 list-unstyled small">
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            <li class="d-flex gap-4 justify-content-center">
+              <h4 class="mb-0 text-center">Προηγούμενες</h4>
+            </li>
+            <li class="d-flex gap-4 px-3 justify-content-left">
+              <img
+                class="bi text-body-secondary flex-shrink-0"
+                height="64"
+                src="./images/javascript.svg"
+                alt="Javascript"
+              />
+              <div>
+                <h5 class="mb-0">Grid view</h5>
+                Not into lists? Try the new grid view.
+              </div>
+            </li>
+            <li class="d-flex gap-4 px-3 justify-content-left">
+              <img
+                class="bi text-body-secondary flex-shrink-0"
+                height="64"
+                src="./images/javascript.svg"
+                alt="Javascript"
+              />
+              <div>
+                <h5 class="mb-0">Grid view</h5>
+                Not into lists? Try the new grid view.
+              </div>
+            </li>
+          </ul>
+          <hr class="divider" />
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            <li class="d-flex gap-4 justify-content-center">
+              <h4 class="mb-0 text-center">Επόμενες</h4>
+            </li>
+            <li class="d-flex gap-4 px-3 justify-content-left">
+              <img
+                class="bi text-body-secondary flex-shrink-0"
+                height="64"
+                src="./images/μετάφραση 2.svg"
+                alt="Εικονίδιο μετάφρασης"
+              />
+              <div>
+                <h5 class="mb-0">Προσθήκη Πλήκτρου</h5>
+                Προσθήκη πλήκτρου για εναλλαγή γλωσσών.
+              </div>
+            </li>
+            <li class="d-flex gap-4 px-3 justify-content-left">
+              <img
+                class="bi text-body-secondary flex-shrink-0"
+                height="64"
+                src="./images/κώδικας.svg"
+                alt="Εικονίδιο κειμένου"
+              />
+              <div>
+                <h5 class="mb-0">Μετάφραση</h5>
+                Δημιουργία λειτουργίας δυναμικής μετάφρασης.
+              </div>
+            </li>
+          </ul>
+        </ul>
+        <hr class="divider" />
+        <button
+          type="button"
+          class="btn btn-lg btn-primary mt-2 w-100"
+          data-bs-dismiss="modal"
+        >
+          Ωραίος
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+  crossorigin="anonymous"
+></script>
+
+<%- include('partials/footer.ejs'); -%>
