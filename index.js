@@ -49,15 +49,19 @@ app.use(getReadBooks);
 
 // GET
 app.get('/', (req, res) => {
-  res.render('index.ejs', { data });
+  res.render('main.ejs', { data });
+});
+
+app.get('/user', (req, res) => {
+  res.render('user-index.ejs', { data });
 });
 
 app.get('/admin', (req, res) => {
-  res.render('index-admin.ejs', { data });
+  res.render('admin-index.ejs', { data });
 });
 
 app.get('/register', (req, res) => {
-  res.render('index.ejs');
+  res.render('user-index.ejs');
 });
 
 // POST
@@ -73,8 +77,8 @@ app.post('/login', async (req, res) => {
   if (δεδομένα.rowCount !== 0) {
     if (χρήστης.password == κωδικός) {
       χρήστης.admin == true
-        ? res.render('index-admin.ejs', { data })
-        : res.render('index.ejs', { data });
+        ? res.render('admin-index.ejs', { data })
+        : res.render('user-index.ejs', { data });
     } else {
       console.error('Ο κωδικός που πληκτρολογήθηκε είναι λάθος');
     }
@@ -101,7 +105,7 @@ app.post('/admin/book', async (req, res) => {
 
   const data = δεδομένα.rows.find((β) => β.book_id == τΒιβλίου);
  
-  res.render('book-page-admin.ejs', { data });
+  res.render('admin-book-page.ejs', { data });
 });
 
 app.post('/add', async (req, res) => {
