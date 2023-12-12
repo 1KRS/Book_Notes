@@ -34,7 +34,7 @@
           <li><a class="nav-link px-2 link-body-emphasis" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Προσωπικός Ιστότοπος</a></li>
           <li><a class="nav-link px-2 link-body-emphasis" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Σχετικά</a></li>
           <li>
-            <button id="add" type="button" class="nav-link px-2 link-body-emphasis" data-bs-toggle="modal" data-bs-target="#technologiesModal">Τεχνολογίες</button>
+            <button id="tech" type="button" class="nav-link px-2 link-body-emphasis" data-bs-toggle="modal" data-bs-target="#technologiesModal">Τεχνολογίες</button>
           </li>
 
           <li>
@@ -86,21 +86,23 @@
             
           </a>
           <ul class="dropdown-menu text-small disabled" >
-            <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#adminLoginModal">Όψη Διαχειριστή</a></li>
+            <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#adminLoginModal">Σύνδεση</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="/">Έξοδος</a></li>
           </ul>
         </div>
       </div>
     </div>
+
+    
   </header>
   <body>
     <main>
-</html>
 
 
+<!-- Modals -->
 
-<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 shadow">
       <div class="modal-header p-5 pb-4 border-bottom-0">
@@ -146,7 +148,7 @@
           </ul>
           <ul class="d-grid gap-4 my-2 list-unstyled small">
             <li class="d-flex gap-4 justify-content-center">
-              <h5 class="mb-0 text-center">Επιπλέον</h5>
+              <h5 class="mb-0 text-center">Επιπρόσθετες</h5>
             </li>
             <li class="d-flex gap-4 justify-content-around">
               <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/ejs.svg" alt="EJS"/>
@@ -156,7 +158,7 @@
           </ul>
           <ul class="d-grid gap-4 my-2 list-unstyled small">
             <li class="d-flex gap-4 justify-content-center">
-              <h5 class="mb-0 text-center">Βάση Δεδομένων</h5>
+              <h5 class="mb-0 text-center">Βάσεις Δεδομένων</h5>
             </li>
             <li class="d-flex gap-4 justify-content-around">
               <img class="bi text-body-secondary flex-shrink-0" height="64" src="./images/postgresql.svg" alt="PostgreSQL"/>
