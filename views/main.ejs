@@ -18,7 +18,7 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
     type="button"
     class="btn btn-outline-danger btn-lg p-1 me-sm-3"
     data-bs-toggle="modal"
-    data-bs-target="#newFeaturesModal"
+    data-bs-target="#currentFeatureModal"
   >
     <div class="d-flex flex-wrap align-items-center justify-content-between">
       <img
@@ -40,7 +40,7 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
   </button>
 </div>
 
-<div class="px-4 pt-5 my-5 text-center border-bottom">
+<div class="px-4 pt-4 mt-4 text-center">
   <h1 class="display-4 fw-bold text-body-emphasis">
     Καλώς ήλθατε στην Βιβλιοθήκη
   </h1>
@@ -50,18 +50,23 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
       βιβλία που έχω διαβάσει.
     </p>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-      <a class="btn btn-primary btn-lg px-4" type="button" href="/user">Δείτε τα βιβλία μου</a>
-      <a class="btn btn-outline-secondary btn-lg px-4" type="button" href="/user">Όψη Διαχειριστή</a>
+      <a class="btn btn-primary btn-lg px-4" type="button" href="/user"
+        >Δείτε τα βιβλία μου</a>
+      <a
+        class="btn btn-outline-secondary btn-lg px-4"
+        type="button"
+        href="/user"
+        >Όψη Διαχειριστή</a>
     </div>
   </div>
-  <div class="overflow-hidden" style="max-height: 30vh">
+  <div class="overflow-hidden" style="max-height: 48vh">
     <div class="container px-5">
       <img
-        src="bootstrap-docs.png"
+        src="images/Βιβλιοθήκη.jpg"
         class="img-fluid border rounded-3 shadow-lg mb-4"
-        alt="Example image"
-        width="700"
-        height="500"
+        alt="Βιβλιοθήκη"
+        width="1500"
+        height="750"
         loading="lazy"
       />
     </div>
@@ -72,8 +77,7 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
 
 <div
   class="modal fade"
-  id="newFeaturesModal"
-  data-bs-backdrop="static"
+  id="oldFeaturesModal"
   data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="additionModalLabel"
@@ -82,43 +86,114 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 shadow">
       <div class="modal-body px-5 py-4">
-        <h2 class="fw-bold pb-1 mb-2 text-center">Προσθήκες</h2>
+        <h2 class="fw-bold pb-1 mb-2 text-center">Πρόσφατες Προσθήκες</h2>
         <hr class="divider" />
         <ul class="d-grid gap-2 my-2 list-unstyled small">
           <ul class="d-grid gap-4 my-2 list-unstyled small">
-            <li class="d-flex gap-4 justify-content-center">
-              <h4 class="mb-0 text-center">Προηγούμενες</h4>
-            </li>
+
             <li class="d-flex gap-4 px-3 justify-content-left">
               <img
                 class="bi text-body-secondary flex-shrink-0"
                 height="64"
-                src="./images/javascript.svg"
+                src="./images/home.svg"
                 alt="Javascript"
               />
               <div>
-                <h5 class="mb-0">Grid view</h5>
-                Not into lists? Try the new grid view.
+                <h5 class="mb-0">Αρχική Οθόνη</h5>
+                Δημιουργία Αρχικής Οθόνης
               </div>
             </li>
+
             <li class="d-flex gap-4 px-3 justify-content-left">
               <img
                 class="bi text-body-secondary flex-shrink-0"
                 height="64"
-                src="./images/javascript.svg"
+                src="./images/modal-list.svg"
+                alt="Εικονίδιο μετάφρασης"
+              />
+              <div>
+                <h5 class="mb-0">Καρτέλες Προσθηκών</h5>
+                Δημιουργία Καρτελών για Προσθήκες.
+              </div>
+            </li>
+
+
+            <li class="d-flex gap-4 px-3 justify-content-left">
+              <img
+                class="bi text-body-secondary flex-shrink-0"
+                height="64"
+                src="./images/home.svg"
                 alt="Javascript"
               />
               <div>
-                <h5 class="mb-0">Grid view</h5>
-                Not into lists? Try the new grid view.
+                <h5 class="mb-0">Αρχική Οθόνη</h5>
+                Προσθήκη Κεντρικής Φωτογραφίας
               </div>
             </li>
+
           </ul>
-          <hr class="divider" />
+        </ul>
+        <hr class="divider" />
+        <div class="d-flex gap-2 justify-content-center">
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-dismiss="modal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="30"
+              fill="currentColor"
+              class="bi bi-house"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#currentFeatureModal"
+          >
+            Τρέχουσα
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-arrow-bar-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="currentFeatureModal"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="additionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-body px-5 py-4">
+        <h2 class="fw-bold pb-1 mb-2 text-center">Τρέχουσα Προσθήκη</h2>
+        <hr class="divider" />
+        <ul class="d-grid gap-2 my-2 list-unstyled small">
           <ul class="d-grid gap-4 my-2 list-unstyled small">
-            <li class="d-flex gap-4 justify-content-center">
-              <h4 class="mb-0 text-center">Επόμενες</h4>
-            </li>
             <li class="d-flex gap-4 px-3 justify-content-left">
               <img
                 class="bi text-body-secondary flex-shrink-0"
@@ -127,10 +202,95 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
                 alt="Εικονίδιο μετάφρασης"
               />
               <div>
-                <h5 class="mb-0">Προσθήκη Πλήκτρου</h5>
+                <h5 class="mb-0">Μετάφραση</h5>
                 Προσθήκη πλήκτρου για εναλλαγή γλωσσών.
               </div>
             </li>
+          </ul>
+        </ul>
+        <hr class="divider" />
+        <div class="d-flex gap-2 justify-content-center">
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#oldFeaturesModal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-arrow-bar-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"
+              />
+            </svg>
+            Πρόσφατες
+          </button>
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-dismiss="modal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="30"
+              fill="currentColor"
+              class="bi bi-house"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#newFeaturesModal"
+          >
+            Επόμενες
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-arrow-bar-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="newFeaturesModal"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="additionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-body px-5 py-4">
+        <h2 class="fw-bold pb-1 mb-2 text-center">Επόμενες Προσθήκες</h2>
+        <hr class="divider" />
+        <ul class="d-grid gap-2 my-2 list-unstyled small">
+          <ul class="d-grid gap-4 my-2 list-unstyled small">
+            
             <li class="d-flex gap-4 px-3 justify-content-left">
               <img
                 class="bi text-body-secondary flex-shrink-0"
@@ -143,16 +303,63 @@ else { %> <%- include('partials/header.ejs'); -%> <% } %>
                 Δημιουργία λειτουργίας δυναμικής μετάφρασης.
               </div>
             </li>
+
+            <li class="d-flex gap-4 px-3 justify-content-left">
+              <img
+                class="bi text-body-secondary flex-shrink-0"
+                height="64"
+                src="./images/home.svg"
+                alt="Εικονίδιο μετάφρασης"
+              />
+              <div>
+                <h5 class="mb-0">Αρχική Σελίδα</h5>
+                Προσθήκη κεντρικής εικόνας.
+              </div>
+            </li>
+
           </ul>
         </ul>
         <hr class="divider" />
-        <button
-          type="button"
-          class="btn btn-lg btn-primary mt-2 w-100"
-          data-bs-dismiss="modal"
-        >
-          Ωραίος
-        </button>
+        <div class="d-flex gap-2 justify-content-center">
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#currentFeatureModal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-arrow-bar-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"
+              />
+            </svg>
+            Τρέχουσα
+          </button>
+          <button
+            type="button"
+            class="btn btn-lg btn-primary mt-2"
+            data-bs-dismiss="modal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="30"
+              fill="currentColor"
+              class="bi bi-house"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
